@@ -4,12 +4,18 @@ import Status from "./Status";
 export default function Board(props) {
   const [squares, setSquare] = useState(Array(9).fill(null));
   const [xValue, setXValue] = useState(true);
+  const [sts, setSts] = useState("running");
+  const winner_handler = (sts) => {
+    if (sts) {
+      setSts("winner");
+    }
+  };
   function handleClick(i) {
     const nextSquares = squares.slice(); //new copy
 
-    if (xValue && nextSquares[i] === null) {
+    if (xValue && nextSquares[i] === null && sts !== "winner") {
       nextSquares[i] = "x";
-    } else if (!xValue && nextSquares[i] === null) {
+    } else if (!xValue && nextSquares[i] === null && sts !== "winner") {
       nextSquares[i] = "0";
     }
 
@@ -19,7 +25,7 @@ export default function Board(props) {
   return (
     <>
       <div>
-        <Status value={xValue} squares={squares} />
+        <Status value={xValue} squares={squares} winner={winner_handler} />
       </div>
       <div className="board-row">
         <Square

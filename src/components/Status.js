@@ -33,5 +33,7 @@ export default function Status(props) {
   } else {
     status = "Next player: " + (props.value ? "X" : "O");
   }
+  props.winner(winner);
+
   return <div style={{ color: "green" }}>{status}</div>;
 }
