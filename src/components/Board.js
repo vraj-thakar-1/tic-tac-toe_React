@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Square from "./Square";
 import Status from "./Status";
+import { ContextData } from "./Context";
+
 export default function Board(props) {
-  const [squares, setSquare] = useState(Array(9).fill(null));
-  const [xValue, setXValue] = useState(true);
-  const [sts, setSts] = useState("running");
-  const winner_handler = (sts) => {
-    if (sts) {
-      setSts("winner");
-    }
-  };
+  const { squares, setSquare, xValue, setXvalue, sts, setSts } =
+    useContext(ContextData);
+  // const [squares, setSquare] = useState(Array(9).fill(null));
+  // const [xValue, setXValue] = useState(true);
+  // const [sts, setSts] = useState("running");
+  // const winner_handler = (sts) => {
+  //   if (sts) {
+  //     setSts("winner");
+  //   }
+  // };
   function handleClick(i) {
     const nextSquares = squares.slice(); //new copy
 
@@ -20,12 +24,12 @@ export default function Board(props) {
     }
 
     setSquare(nextSquares);
-    setXValue(!xValue);
+    setXvalue(!xValue);
   }
   return (
     <>
       <div>
-        <Status value={xValue} squares={squares} winner={winner_handler} />
+        <Status />
       </div>
       <div className="board-row">
         <Square

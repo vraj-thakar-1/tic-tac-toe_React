@@ -1,7 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { ContextData } from "./Context";
 
-export default function Status(props) {
-  const squares = props.squares;
+export default function Status() {
+  const { squares, setSts, xValue } = useContext(ContextData);
+  // const squares = props.squares;
 
   function calculateWinner(squares) {
     const lines = [
@@ -30,10 +33,11 @@ export default function Status(props) {
   let status;
   if (winner) {
     status = "Winner: " + winner;
+    setSts("winner");
   } else {
-    status = "Next player: " + (props.value ? "X" : "O");
+    status = "Next player: " + (xValue ? "X" : "O");
   }
-  props.winner(winner);
+  // props.winner(winner);
 
   return <div style={{ color: "green" }}>{status}</div>;
 }
